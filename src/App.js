@@ -1,8 +1,9 @@
-import { Header } from "./components";
+import { Approach, Header } from "./components";
 function App() {
   return (
     <div>
       <Header />
+      <Approach />
     </div>
   );
 }
