@@ -1,10 +1,10 @@
-import json from "../data.json";
 import Card from "./Card";
-import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import Input from "./Input";
 
 export const OurWork = () => {
-  const { data } = json;
-  const [searchTerm, setSearchTerm] = useState("");
+  const { data, searchTerm } = useContext(AppContext);
 
   return (
     <>
@@ -13,16 +13,11 @@ export const OurWork = () => {
           <h1 className="text-2xl font-bold text-center py-10">
             Check out our products
           </h1>
-          <div className="text-center">
-            <input
-              type="text"
-              value={searchTerm}
-              placeholder="Search..."
-              className="p-2 w-3/4 shadow rounded  "
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
+
+          <div className="mb-6 w-3/4 group mx-auto ">
+            <Input />
           </div>
-          <ul className="grid md:grid-cols-3 gap-8 p-10">
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
             {data
               .filter((article) => {
                 return article.name
