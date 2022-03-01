@@ -7,8 +7,11 @@ const { data } = json;
 
 export const AppContextProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selected, setSelected] = useState(false);
   return (
-    <AppContext.Provider value={{ searchTerm, setSearchTerm, data }}>
+    <AppContext.Provider
+      value={{ searchTerm, setSearchTerm, data, selected, setSelected }}
+    >
       {children}
     </AppContext.Provider>
   );

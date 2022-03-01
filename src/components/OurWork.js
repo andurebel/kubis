@@ -4,7 +4,11 @@ import { AppContext } from "../context/AppContext";
 import Input from "./Input";
 
 export const OurWork = () => {
-  const { data, searchTerm } = useContext(AppContext);
+  const { data, searchTerm, selected, setSelected } = useContext(AppContext);
+
+  const filteredData = data.filter((article) =>
+    article.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   return (
     <>
@@ -15,23 +19,38 @@ export const OurWork = () => {
           </h1>
 
           <div className="mb-6 w-3/4 group mx-auto ">
-            <Input />
+            <Input filteredData={filteredData} />
           </div>
+          {filteredData.length === 0 && (
+            <>
+              <h1 className="text-center text-xl mb-6">No matches found</h1>
+              <div>
+                Try some sugestions:
+                {data.map((article) => (
+                  <>
+                    <p
+                      key={article.sku}
+                      onClick={() => {
+                        setSelected(true);
+                      }}
+                      className="bg-red-200 inline-block m-2 py-2 px-4 rounded-full cursor-pointer hover:bg-purple-700 hover:text-white hover:shadow-xl"
+                    >
+                      {article.name}
+                    </p>
+                  </>
+                ))}
+              </div>
+            </>
+          )}
           <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
-            {data
-              .filter((article) => {
-                return article.name
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase());
-              })
-              .map((article) => (
-                <Card
-                  key={article.sku}
-                  name={article.name}
-                  description={article.description}
-                  image={article.main_image}
-                />
-              ))}
+            {filteredData.map((article) => (
+              <Card
+                key={article.sku}
+                name={article.name}
+                description={article.description}
+                image={article.main_image}
+              />
+            ))}
           </ul>
         </div>
       </main>
