@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import Input from "./Input";
 
 export const OurWork = () => {
-  const { data, searchTerm, setSelected } = useContext(AppContext);
+  const { data, searchTerm, setSearchTerm } = useContext(AppContext);
 
   const filteredData = data.filter((article) =>
     article.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -31,7 +31,7 @@ export const OurWork = () => {
                     <p
                       key={article.sku}
                       onClick={() => {
-                        setSelected(true);
+                        setSearchTerm(article.name.slice(0, 5));
                       }}
                       className="bg-red-200 inline-block m-2 py-2 px-4 rounded-full cursor-pointer hover:bg-purple-700 hover:text-white hover:shadow-xl"
                     >
