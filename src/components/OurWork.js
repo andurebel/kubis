@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import Input from "./Input";
 
 export const OurWork = () => {
-  const { data, searchTerm, selected, setSelected } = useContext(AppContext);
+  const { data, searchTerm, setSelected } = useContext(AppContext);
 
   const filteredData = data.filter((article) =>
     article.name.toLowerCase().includes(searchTerm.toLowerCase()),
