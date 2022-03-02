@@ -2,6 +2,7 @@ import Card from "./Card";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Input from "./Input";
+import Filters from "./Filters";
 
 export const OurWork = () => {
   const { data, searchTerm, setSearchTerm } = useContext(AppContext);
@@ -42,6 +43,10 @@ export const OurWork = () => {
               </div>
             </>
           )}
+
+          <div>
+            <Filters />
+          </div>
           <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
             {filteredData.map((article) => (
               <Card
